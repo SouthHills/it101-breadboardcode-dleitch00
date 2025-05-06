@@ -1,0 +1,8 @@
+import subprocess
+import time
+# Start the process
+process = subprocess.Popen(["firefox"])
+# Wait for some time (for demonstration)
+time.sleep(30)
+# Terminate the process
+process.terminate()
