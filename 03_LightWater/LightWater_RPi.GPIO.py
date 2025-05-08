@@ -3,6 +3,7 @@
 import RPi.GPIO as GPIO
 import time
 
+
 ledPins = [11, 12, 13, 15, 16, 18, 22, 3, 5, 24]
 
 def setup():    
