@@ -5,8 +5,12 @@ import time
 import random
 from collections import deque
 from input_structure import Input
+from joystick import Joystick
+
 
 pygame.init()
+
+joystick_input = Joystick()
 
 # Set up the display
 GRID_SIZE = 56
@@ -54,19 +58,19 @@ def generate_food():
     return random.randrange(GRID_WIDTH), random.randrange(GRID_HEIGHT)
 
 def check_input():
-    global current_direction, JOYSTICK
+    global current_direction, joystick_input
     # TODO: Replace "False" with the correct method call to the joystick object you make
     # Can't double-back on your snake
-    if False and current_direction != Input.RIGHT:
+    if joystick_input.get_direction() == "Left" and current_direction != Input.RIGHT:
         input_buffer.append(Input.LEFT)
-    elif False and current_direction != Input.LEFT:
+    elif joystick_input.get_direction() == "Right" and current_direction != Input.LEFT:
         input_buffer.append(Input.RIGHT)
-    elif False and current_direction != Input.DOWN:
+    elif joystick_input.get_direction() == "Up"  and current_direction != Input.DOWN:
         input_buffer.append(Input.UP)
-    elif False and current_direction != Input.UP:
+    elif joystick_input.get_direction() == "Down"  and current_direction != Input.UP:
         input_buffer.append(Input.DOWN)
     
-    if False: # Pressing in on the joystick should pause the game
+    if joystick_input.get_button_pressed() : # Pressing in on the joystick should pause the game
         input_buffer.append(Input.PRESS)
 
 # Function to main loop
@@ -74,6 +78,7 @@ def game_loop():
     global PAUSED, current_direction
     game_over = False
     game_close = False
+    
 
     while True:
         
@@ -193,7 +198,7 @@ def game_loop():
                         game_over = True
                         
             # TODO: Replace "False" with a call to the appropriate method in your joystick instance
-            if False:
+            if joystick_input.get_button_pressed():
                 game_close = False
                 game_over = False
 
@@ -204,7 +209,7 @@ def game_loop():
 def input_loop(interval_ms: int):
     while True:
         check_input() # Poll the input device
-        time.sleep(interval_ms / 1000.0) # Convert ms to seconds
+        time.sleep(.01) # Convert ms to seconds
 
 if __name__ == '__main__':
     print ('Program is starting ... ') # Program entrance
