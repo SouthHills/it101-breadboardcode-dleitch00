@@ -1,15 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 
-laserPin: int = 37
-receiverPin: int = 40
+receiverPin: int = 17
 
 def setup():
-    GPIO.setmode(GPIO.BOARD)
-    # Setup laser
-    GPIO.setup(laserPin, GPIO.OUT)
-    GPIO.output(laserPin, GPIO.LOW)
-    print (f'using pin {laserPin}')
+    GPIO.setmode(GPIO.BCM)
     
     # Setup reciever
     GPIO.setup(receiverPin, GPIO.IN)
